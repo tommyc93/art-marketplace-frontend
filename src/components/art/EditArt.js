@@ -19,7 +19,7 @@ const EditArt = (props) => {
 
     ///////////////---------Return---------///////////////
     return (
-        <div class='mb-3 w-25 mx-auto'>
+        <div class='mb-3'>
             <details>
             <summary>Edit Art</summary>
                 <form onSubmit={handleSubmit}>
@@ -39,7 +39,9 @@ const EditArt = (props) => {
                     <input type="date" name="created_date" onChange={handleChange} value={piece.created_date} class="form-control"/><br/>
                     <input type='submit' class='btn btn-outline-dark' />
                 </form>
+
             </details>
+            <button onClick={props.handleDelete} value={piece.id} class='btn btn-outline-danger'>Delete</button>
         </div>
     )
 }
