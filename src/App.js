@@ -4,10 +4,13 @@ import React, {useState, useEffect} from 'react'
 // import 'react-responsive-modal/styles.css'
 import axios from 'axios'
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 //====Art====//
 import CreateArt from './components/art/CreateArt'
 import EditArt from './components/art/EditArt'
 import ShowArt from './components/art/ShowArt'
+import Banner from './components/utils/Banner'
+import NavBar from './components/utils/NavBar'
 
 //====Artist====//
 // import CreateArtist from './components/artist/CreateArtist'
@@ -19,6 +22,8 @@ import ShowArt from './components/art/ShowArt'
 const App = () => {
     ///////////////---------Hooks/States---------///////////////
     let [artCollection, setArtCollection] = useState([])
+    let [currentUser, setCurrentUser] = useState('')
+    let [currentView, setCurrentView] = useState('')
 
     ///////////////---------Functions---------///////////////
     //====Create====//
@@ -67,19 +72,35 @@ const App = () => {
 
     ///////////////---------Return---------///////////////
     return(
-        <div>
-            <h1>Hello World</h1>
-            <CreateArt handleCreate={handleCreate} />
-            {artCollection.map((pieces) => {
-                return (
-                    <div>
-                        <ShowArt prop={pieces} />
-                        <EditArt handleUpdate={handleUpdate} piece={pieces} />
-                        <button onClick={handleDelete} value={pieces.id}>Delete</button>
-                    </div>
-                )
-            })}
-        </div>
+        <>
+            <NavBar setCurrentView={setCurrentView} />
+
+            <div class='mx-auto text-center'>
+
+            {currentView == 'create' &&
+                <CreateArt
+                  handleCreate={handleCreate}
+                />
+            }
+            {currentView == 'showArt' &&
+                artCollection.map((pieces) => {
+                    return <ShowArt prop={pieces} />
+                })
+            }
+            {currentView == 'editArt' &&
+                artCollection.map((pieces) => {
+                  return (
+                      <div>
+                          <ShowArt prop={pieces} />
+                          <EditArt handleUpdate={handleUpdate} piece={pieces} />
+                          <button onClick={handleDelete} value={pieces.id} class='btn btn-outline-danger'>Delete</button>
+                      </div>
+                  )
+                })
+            }
+
+            </div>
+        </>
     )
 }
 
