@@ -36,7 +36,7 @@ const EditArt = (props) => {
                     <label htmlFor="description">Description: </label>
                     <input type="text" name="description" onChange={handleChange} value={piece.description}/><br/>
                     <label htmlFor="created_date">Created Date: </label>
-                    <input type="text" name="created_date" onChange={handleChange} value={piece.created_date}/><br/>
+                    <input type="date" name="created_date" onChange={handleChange} value={piece.created_date}/><br/>
                     <input type='submit' />
                 </form>
             </details>
