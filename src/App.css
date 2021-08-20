@@ -38,7 +38,7 @@
 }
 
 .flex-even {
-  max-width: 50vh;
+  max-width: 66vh;
   border-radius: .5rem;
   margin: 1em;
   box-shadow: 3px 3px 5px var(--black);
