@@ -10,7 +10,7 @@ const ShowArt = (props) => {
                 <h3>{props.prop.title}</h3>
             </div>
             <div class='card-body'>
-                <img src={props.prop.image} />
+                <img class='w-100' src={props.prop.image} />
             </div>
             <div class='card-footer'>
                 <h5><strong>Author: </strong>{props.prop.author}</h5>
