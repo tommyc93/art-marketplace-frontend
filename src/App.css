@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.flex-even {
+  max-width: 30vh;
+  border-radius: .5rem;
+  margin: 1em;
+  box-shadow: 3px 3px 5px var(--black);
+  transition: .05s;
+}
+
+.flex-even:hover {
+    cursor: pointer;
+    transform: translate(3px, 3px);
+    box-shadow: none;
+}

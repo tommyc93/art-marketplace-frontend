@@ -21,7 +21,7 @@ const App = () => {
     ///////////////---------Hooks/States---------///////////////
     let [artCollection, setArtCollection] = useState([])
     let [currentUser, setCurrentUser] = useState('')
-    let [currentView, setCurrentView] = useState('')
+    let [currentView, setCurrentView] = useState('showArt')
 
     ///////////////---------Functions---------///////////////
     //====Create====//
@@ -81,20 +81,35 @@ const App = () => {
                 />
             }
             {currentView == 'showArt' &&
-                artCollection.map((pieces) => {
+                <>
+                <br/><br/>
+                <div class='d-flex flex-wrap mx-auto text-center'>
+                {artCollection.map((pieces) => {
                     return <ShowArt prop={pieces} />
-                })
+                })}
+                </div>
+                </>
             }
             {currentView == 'editArt' &&
-                artCollection.map((pieces) => {
+                <>
+                <br/><br/>
+                <div class='d-flex flex-wrap mx-auto'>
+                {artCollection.map((pieces) => {
                   return (
-                      <div>
-                          <ShowArt prop={pieces} />
-                          <EditArt handleUpdate={handleUpdate} piece={pieces} />
-                          <button onClick={handleDelete} value={pieces.id} class='btn btn-outline-danger'>Delete</button>
+                      <div class='card flex-even'>
+                          <ShowArt
+                              prop={pieces}
+                          />
+                          <EditArt
+                              handleUpdate={handleUpdate}
+                              piece={pieces}
+                              handleDelete
+                          />
                       </div>
                   )
-                })
+                })}
+                </div>
+                </>
             }
 
             </div>
