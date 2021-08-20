@@ -5,7 +5,7 @@ import React, {useState} from 'react'
 
 const EditArt = (props) => {
     ///////////////---------Hooks/States---------///////////////
-    let [piece, setPiece] = useState(...props.piece)
+    let [piece, setPiece] = useState({...props.piece})
 
     ///////////////---------Function---------///////////////
     const handleChange = (event) => {
