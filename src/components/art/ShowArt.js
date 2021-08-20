@@ -8,7 +8,7 @@ const ShowArt = (props) => {
         <div>
             <h3>{props.prop.title}</h3>
             <img src={props.prop.image} />
-            <h4><strong>Author: </strong>{props.prop.author}</h5>
+            <h4><strong>Author: </strong>{props.prop.author}</h4>
             <h5><strong>Description: </strong>{props.prop.description}</h5>
             <ul>
                 <li><strong>Created Date: </strong>{props.prop.created_date}</li>
