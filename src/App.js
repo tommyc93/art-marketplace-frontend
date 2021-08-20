@@ -6,7 +6,7 @@ import axios from 'axios'
 import './App.css';
 //====Art====//
 import CreateArt from './components/art/CreateArt'
-import EditArt from './components/art/Edit'
+import EditArt from './components/art/EditArt'
 import ShowArt from './components/art/ShowArt'
 
 //====Artist====//
@@ -24,7 +24,7 @@ const App = () => {
     //====Create====//
     const handleCreate = (addArt) => {
         axios
-            .post('herokulink', addArt)
+            .post('https://murmuring-coast-02165.herokuapp.com/api/art', addArt)
             .then((response) => {
                 console.log(response)
                 getArt()
@@ -34,7 +34,7 @@ const App = () => {
     //====Update====//
     const handleUpdate = (editArt) => {
         axios
-            .put('herokulink/' + editArt.id, editArt)
+            .put('https://murmuring-coast-02165.herokuapp.com/api/art/' + editArt.id, editArt)
             .then((response) => {
                 getArt()
             })
@@ -43,7 +43,7 @@ const App = () => {
     //====Delete====//
     const handleDelete = (event) => {
         axios
-            .delete('herokulink/' + event.target.value)
+            .delete('https://murmuring-coast-02165.herokuapp.com/api/art/' + event.target.value)
             .then((response) => {
                 getArt()
             })
@@ -52,7 +52,7 @@ const App = () => {
     //====Show====//
     const getArt = () => {
         axios
-            .get('herokulink')
+            .get('https://murmuring-coast-02165.herokuapp.com/api/art')
             .then(
                 (response) => setArtCollection(response.data),
                 (error) => console.error(error)
