@@ -71,6 +71,7 @@ const App = () => {
     ///////////////---------Return---------///////////////
     return(
         <>
+            <Banner />
             <NavBar setCurrentView={setCurrentView} />
 
             <div class='mx-auto text-center'>
