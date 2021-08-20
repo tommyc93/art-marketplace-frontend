@@ -1,7 +1,5 @@
 ///////////////---------Imports---------///////////////
 import React, {useState, useEffect} from 'react'
-// import {Modal} from 'react-responsive-modal'
-// import 'react-responsive-modal/styles.css'
 import axios from 'axios'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,7 +15,7 @@ import NavBar from './components/utils/NavBar'
 // import EditArtist from './components/artist/EditArtist'
 
 //====Users====//
-// import CreateUser from './components/user/CreateUser'
+// import CreateUser from './components/users/CreateUser'
 
 const App = () => {
     ///////////////---------Hooks/States---------///////////////
