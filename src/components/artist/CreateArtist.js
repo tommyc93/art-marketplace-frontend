@@ -1,7 +1,5 @@
 // ///////////////---------Imports---------///////////////
 // import React, {useState} from 'react'
-// // import {Modal} from 'react-responsive-modal'
-// // import 'react-responsive-modal/styles.css'
 //
 // const CreateArtist = (props) => {
 //     ///////////////---------Hooks/States---------///////////////
