@@ -2,20 +2,46 @@
 import React, {useState} from 'react'
 
 const NavBar = (props) => {
-  ///////////////---------Hooks/States---------///////////////
+  ///////////////---------Functions---------///////////////
+  const logOut = () => {
+       props.setCurrentUser(undefined)
+       props.setCurrentView('showArt')
+   }
+
+  ///////////////---------Return---------///////////////
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-
-    <a class="btn btn-nav dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        Art
-    </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <a class="dropdown-item" onClick={()=> {props.setCurrentView('create')}}>Add Art</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" onClick={()=> {props.setCurrentView('editArt')}}>Edit Art</a>
-        </div>
-      <button class="btn btn-nav mx-auto" onClick={()=> {props.setCurrentView('showArt')}}>Gallery</button>
-
+        <ul class="navbar-nav nav-fill w-100">
+            <li class="nav-item dropdown">
+                <button class="btn btn-link nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Art
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" onClick={()=> {props.setCurrentView('create')}}>Add Art</a></li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><a class="dropdown-item" onClick={()=> {props.setCurrentView('editArt')}}>Edit Art</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-nav mx-auto" onClick={()=> {props.setCurrentView('showArt')}}>Gallery</button>
+            </li>
+            <li class="nav-item">
+                {props.currentUser &&
+                    <p>Welcome {props.currentUser.username}</p>
+                }
+            </li>
+            <li class="nav-item">
+                 {props.currentUser ?
+                    <>
+                        <button className="btn btn-nav" onClick={()=> logOut()}>Log Out</button>
+                    </>:
+                    <>
+                        <button className="btn btn-nav" onClick={()=>props.setCurrentView('logIn')}>Log In</button>
+                        <button className="btn btn-nav" onClick={()=>props.setCurrentView('signUp')}>Sign Up</button>
+                    </>
+                 }
+            </li>
+        </ul>
     </nav>
   )
 }

@@ -9,6 +9,8 @@ import EditArt from './components/art/EditArt'
 import ShowArt from './components/art/ShowArt'
 import Banner from './components/utils/Banner'
 import NavBar from './components/utils/NavBar'
+import CreateUser from './components/users/CreateUser'
+import LogIn from './components/users/LogIn'
 
 //====Artist====//
 // import CreateArtist from './components/artist/CreateArtist'
@@ -20,8 +22,9 @@ import NavBar from './components/utils/NavBar'
 const App = () => {
     ///////////////---------Hooks/States---------///////////////
     let [artCollection, setArtCollection] = useState([])
-    let [currentUser, setCurrentUser] = useState('')
+    let [currentUser, setCurrentUser] = useState(undefined)
     let [currentView, setCurrentView] = useState('showArt')
+    let [users, setUsers] = useState([])
 
     ///////////////---------Functions---------///////////////
     //====Create====//
@@ -63,19 +66,47 @@ const App = () => {
             .catch((error) => console.error(error))
     }
 
+    const getUsers = () => {
+        axios
+            .get('https://murmuring-coast-02165.herokuapp.com/api/users')
+            .then((response) => {
+                setUsers(response.data)
+            })
+    }
+
     //====useEffect====//
     useEffect(() => {
         getArt()
+        getUsers()
     }, [])
 
     ///////////////---------Return---------///////////////
     return(
         <>
             <Banner />
-            <NavBar setCurrentView={setCurrentView} />
+            <NavBar
+                setCurrentView={setCurrentView}
+                getUsers={getUsers}
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+            />
 
             <div class='mx-auto text-center'>
 
+            {currentView == 'signUp' &&
+                <CreateUser
+                    setCurrentUser={setCurrentUser}
+                    setCurrentView={setCurrentView}
+                    getUsers={getUsers}
+                />
+            }
+            {currentView == 'logIn' &&
+                <LogIn
+                    setCurrentUser={setCurrentUser}
+                    setCurrentView={setCurrentView}
+                    users={users}
+                />
+            }
             {currentView == 'create' &&
                 <CreateArt
                   handleCreate={handleCreate}
