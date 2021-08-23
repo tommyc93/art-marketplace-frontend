@@ -68,6 +68,11 @@ const App = () => {
             .catch((error) => console.error(error))
     }
 
+    //====Add to Cart====//
+    const addCart = (buyArt) => {
+        setCart([...cart, buyArt])
+    }
+
     const getUsers = () => {
         axios
             .get('https://murmuring-coast-02165.herokuapp.com/api/users')
@@ -130,7 +135,7 @@ const App = () => {
                 <br/><br/>
                 <div class='d-flex flex-wrap mx-auto text-center'>
                 {artCollection.map((pieces) => {
-                    return <ShowArt prop={pieces} />
+                    return <ShowArt prop={pieces} addCart={addCart}/>
                 })}
                 </div>
                 </>
