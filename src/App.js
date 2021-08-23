@@ -11,6 +11,7 @@ import Banner from './components/utils/Banner'
 import NavBar from './components/utils/NavBar'
 import CreateUser from './components/users/CreateUser'
 import LogIn from './components/users/LogIn'
+import Cart from './components/utils/Cart'
 
 //====Artist====//
 // import CreateArtist from './components/artist/CreateArtist'
@@ -26,7 +27,7 @@ const App = () => {
     let [currentView, setCurrentView] = useState('showArt')
     let [users, setUsers] = useState([])
     let [artists, setArtists] =useState([])
-
+    let [cart, setCart] = useState([])
     ///////////////---------Functions---------///////////////
     //====Create====//
     const handleCreate = (addArt) => {
@@ -154,6 +155,11 @@ const App = () => {
                   )
                 })}
                 </div>
+                </>
+            }
+            {currentView == 'cart' &&
+                <>
+                    <Cart items={cart} />
                 </>
             }
 
