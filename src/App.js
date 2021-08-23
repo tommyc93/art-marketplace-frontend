@@ -27,6 +27,7 @@ const App = () => {
     let [currentUser, setCurrentUser] = useState(undefined)
     let [currentView, setCurrentView] = useState('showArt')
     let [users, setUsers] = useState([])
+    let [artists, setArtists] =useState([])
 
     ///////////////---------Functions---------///////////////
     //====Create====//
@@ -76,10 +77,19 @@ const App = () => {
             })
     }
 
+    const getArtists = () => {
+        axios
+            .get('https://murmuring-coast-02165.herokuapp.com/api/artist')
+            .then((response) => {
+                setArtists(response.data)
+            })
+    }
+
     //====useEffect====//
     useEffect(() => {
         getArt()
         getUsers()
+        getArtists()
     }, [])
 
     ///////////////---------Return---------///////////////
@@ -112,6 +122,8 @@ const App = () => {
             {currentView == 'create' &&
                 <CreateArt
                   handleCreate={handleCreate}
+                  artists={artists}
+                  setCurrentView={setCurrentView}
                 />
             }
             {currentView == 'showArt' &&
@@ -137,7 +149,8 @@ const App = () => {
                           <EditArt
                               handleUpdate={handleUpdate}
                               piece={pieces}
-                              handleDelete
+                              handleDelete={handleDelete}
+                              artists={artists}
                           />
                       </div>
                   )
