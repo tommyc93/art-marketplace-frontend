@@ -11,6 +11,7 @@ import Banner from './components/utils/Banner'
 import NavBar from './components/utils/NavBar'
 import CreateUser from './components/users/CreateUser'
 import LogIn from './components/users/LogIn'
+import Cart from './components/utils/Cart'
 
 //====Artist====//
 // import CreateArtist from './components/artist/CreateArtist'
@@ -26,7 +27,7 @@ const App = () => {
     let [currentView, setCurrentView] = useState('showArt')
     let [users, setUsers] = useState([])
     let [artists, setArtists] =useState([])
-
+    let [cart, setCart] = useState([])
     ///////////////---------Functions---------///////////////
     //====Create====//
     const handleCreate = (addArt) => {
@@ -65,6 +66,21 @@ const App = () => {
                 (error) => console.error(error)
             )
             .catch((error) => console.error(error))
+    }
+
+    //====Add to Cart====//
+    const addCart = (buyArt) => {
+        if(cart.includes(buyArt)) {
+            alert("Already have item in cart.")
+        } else {
+            setCart([...cart, buyArt])
+        }
+    }
+
+    //====Remove from Cart====//
+    const removeCart = (xArt) => {
+        const items = cart.filter(item => item.id != item.id)
+        setCart(items)
     }
 
     const getUsers = () => {
@@ -129,7 +145,7 @@ const App = () => {
                 <br/><br/>
                 <div class='d-flex flex-wrap mx-auto text-center'>
                 {artCollection.map((pieces) => {
-                    return <ShowArt prop={pieces} />
+                    return <ShowArt prop={pieces} addCart={addCart} />
                 })}
                 </div>
                 </>
@@ -154,6 +170,14 @@ const App = () => {
                   )
                 })}
                 </div>
+                </>
+            }
+            {currentView == 'cart' &&
+                <>
+                    <Cart cart={cart}
+                    handleDelete={handleDelete}
+                    removeCart={removeCart}
+                    />
                 </>
             }
 
