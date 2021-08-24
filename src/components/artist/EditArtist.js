@@ -10,7 +10,7 @@ const EditArtist = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    props.handleUpdate(person)
+    props.handleUpdateArtist(person)
   }
 
   return (
@@ -19,7 +19,7 @@ const EditArtist = (props) => {
         <summary>Edit Artist</summary>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name" class="form-label">Name: </label>
-              
+
                 <input type="text" name="name" onChange={handleChange} value={person.name} class="form-control"/><br/>
                 <label htmlFor="bio" class="form-label">Bio: </label>
                 <textarea type="text" name="bio" onChange={handleChange} value={person.bio} class="form-control"></textarea><br/>
@@ -27,7 +27,7 @@ const EditArtist = (props) => {
             </form>
 
         </details>
-        <button onClick={props.handleDelete} value={person.id} class='btn btn-outline-danger'>Delete</button>
+        <button onClick={props.handleDeleteArtist} value={person.id} class='btn btn-outline-danger'>Delete</button>
     </div>
   )
   }

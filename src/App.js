@@ -57,6 +57,13 @@ const App = () => {
                 getArt()
             })
     }
+    const handleUpdateArtist = (editArtist) => {
+        axios
+            .put('https://murmuring-coast-02165.herokuapp.com/api/artist/' + editArtist.id, editArtist)
+            .then((response) => {
+                getArtists()
+            })
+    }
 
     //====Delete====//
     const handleDelete = (event) => {
@@ -65,6 +72,13 @@ const App = () => {
             .then((response) => {
                 getArt()
             })
+    }
+    const handleDeleteArtist = (event)=> {
+      axios
+        .delete('https://murmuring-coast-02165.herokuapp.com/api/artist/' + event.target.value)
+        .then((response) => {
+          getArtists()
+        })
     }
 
     //====Show====//
@@ -186,9 +200,9 @@ const App = () => {
                       <div class='card flex-even'>
 
                           <EditArtist
-                              handleUpdate={handleUpdate}
+                              handleUpdateArtist={handleUpdateArtist}
                               person={person}
-                              handleDelete={handleDelete}
+                              handleDeleteArtist={handleDeleteArtist}
                               artists={artists}
                           />
                       </div>
