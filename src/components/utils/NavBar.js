@@ -36,7 +36,9 @@ const NavBar = (props) => {
             <li class="nav-item">
                 <button class="btn btn-nav mx-auto" onClick={()=> {props.setCurrentView('cart')}}>Shopping Cart</button>
             </li>
-            <select value={props.filterBy} onChange={props.updateFilter}>
+            <li class="nav-item">
+            <label htmlFor='select'>Filter By Artist:</label><br/>
+            <select class='form-select w-50 mx-auto' value={props.filterBy} onChange={props.updateFilter}>
                 <option>All</option>
               {
                 props.artists.map((artist) => {
@@ -44,6 +46,7 @@ const NavBar = (props) => {
                 })
               }
             </select>
+            </li>
             <li class="nav-item">
                 {props.currentUser &&
                     <p>Welcome {props.currentUser.username}</p>
