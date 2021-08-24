@@ -70,7 +70,17 @@ const App = () => {
 
     //====Add to Cart====//
     const addCart = (buyArt) => {
-        setCart([...cart, buyArt])
+        if(cart.includes(buyArt)) {
+            alert("Already have item in cart.")
+        } else {
+            setCart([...cart, buyArt])
+        }
+    }
+
+    //====Remove from Cart====//
+    const removeCart = (xArt) => {
+        const items = cart.filter(item => item.id != item.id)
+        setCart(items)
     }
 
     const getUsers = () => {
@@ -135,7 +145,7 @@ const App = () => {
                 <br/><br/>
                 <div class='d-flex flex-wrap mx-auto text-center'>
                 {artCollection.map((pieces) => {
-                    return <ShowArt prop={pieces} addCart={addCart}/>
+                    return <ShowArt prop={pieces} addCart={addCart} />
                 })}
                 </div>
                 </>
@@ -164,7 +174,10 @@ const App = () => {
             }
             {currentView == 'cart' &&
                 <>
-                    <Cart items={cart} />
+                    <Cart cart={cart}
+                    handleDelete={handleDelete}
+                    removeCart={removeCart}
+                    />
                 </>
             }
 
