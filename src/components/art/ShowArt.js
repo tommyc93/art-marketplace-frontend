@@ -3,8 +3,8 @@ import React from 'react'
 
 const ShowArt = (props) => {
 
-    const handleBuy = (event, addedItem) => {
-        event.preventDefault()
+    const handleBuy = (addedItem) => {
+        console.log(addedItem)
         props.addCart(addedItem)
     }
 
@@ -26,7 +26,7 @@ const ShowArt = (props) => {
                       <li class='list-unstyled'><strong>Price: </strong>{props.prop.price}</li>
                       <li class='list-unstyled'><strong>Rating: </strong>{props.prop.rating}</li>
                 </ul>
-                <button onClick={ ()=> handleBuy(props.prop)} class='btn btn-outline-danger'>Add to Cart</button>
+                <button onClick={()=>handleBuy(props.prop)} class='btn btn-outline-danger'>Add to Cart</button>
             </div>
         </div>
     )
