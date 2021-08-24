@@ -11,7 +11,7 @@ import Banner from './components/utils/Banner'
 import NavBar from './components/utils/NavBar'
 import CreateUser from './components/users/CreateUser'
 import LogIn from './components/users/LogIn'
-import Cart from './components/utils/Cart'
+import CreateArtist from './components/artist/CreateArtist'
 
 //====Artist====//
 // import CreateArtist from './components/artist/CreateArtist'
@@ -27,7 +27,7 @@ const App = () => {
     let [currentView, setCurrentView] = useState('showArt')
     let [users, setUsers] = useState([])
     let [artists, setArtists] =useState([])
-    let [cart, setCart] = useState([])
+
     ///////////////---------Functions---------///////////////
     //====Create====//
     const handleCreate = (addArt) => {
@@ -37,6 +37,15 @@ const App = () => {
                 console.log(response)
                 getArt()
             })
+    }
+
+    const handleCreateArtist = (addArtist) => {
+      axios
+        .post('https://murmuring-coast-02165.herokuapp.com/api/artist', addArtist)
+        .then((response) => {
+          getArtists()
+        })
+
     }
 
     //====Update====//
@@ -63,24 +72,10 @@ const App = () => {
             .get('https://murmuring-coast-02165.herokuapp.com/api/art')
             .then(
                 (response) => setArtCollection(response.data),
+
                 (error) => console.error(error)
             )
             .catch((error) => console.error(error))
-    }
-
-    //====Add to Cart====//
-    const addCart = (buyArt) => {
-        if(cart.includes(buyArt)) {
-            alert("Already have item in cart.")
-        } else {
-            setCart([...cart, buyArt])
-        }
-    }
-
-    //====Remove from Cart====//
-    const removeCart = (xArt) => {
-        const items = cart.filter(item => item.id != item.id)
-        setCart(items)
     }
 
     const getUsers = () => {
@@ -98,6 +93,8 @@ const App = () => {
                 setArtists(response.data)
             })
     }
+
+
 
     //====useEffect====//
     useEffect(() => {
@@ -140,12 +137,18 @@ const App = () => {
                   setCurrentView={setCurrentView}
                 />
             }
+            {currentView == 'createArtist' &&
+                <CreateArtist
+                  handleCreateArtist={handleCreateArtist}
+                  setCurrentView={setCurrentView}
+                />
+            }
             {currentView == 'showArt' &&
                 <>
                 <br/><br/>
                 <div class='d-flex flex-wrap mx-auto text-center'>
                 {artCollection.map((pieces) => {
-                    return <ShowArt prop={pieces} addCart={addCart} />
+                    return <ShowArt prop={pieces} />
                 })}
                 </div>
                 </>
@@ -170,14 +173,6 @@ const App = () => {
                   )
                 })}
                 </div>
-                </>
-            }
-            {currentView == 'cart' &&
-                <>
-                    <Cart cart={cart}
-                    handleDelete={handleDelete}
-                    removeCart={removeCart}
-                    />
                 </>
             }
 
