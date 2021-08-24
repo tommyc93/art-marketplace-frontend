@@ -19,13 +19,16 @@ const CreateArtist = (props) => {
 
     ///////////////---------Return---------///////////////
     return (
-        <div>
+        <div class='mb-3 w-50 mx-auto'>
+        <br/><br/><br/><br/>
+            <h3>Add New Artist</h3>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="name">Name: </label>
-                <input type="text" name="name" onChange={handleChange} /><br/>
+            <br/>
+                <label htmlFor="name" class="form-label">Name: </label>
+                <input type="text" name="name" onChange={handleChange} class="form-control" /><br/>
                 <label htmlFor="bio">Bio: </label>
-                <input type="text" name="bio" onChange={handleChange} /><br/>
-                <input type='submit' />
+                <textarea type="text" name="bio" onChange={handleChange} class="form-control"></textarea><br/>
+                <input type='submit' class='btn btn-outline-dark' />
             </form>
         </div>
     )
