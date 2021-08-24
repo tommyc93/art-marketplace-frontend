@@ -36,6 +36,14 @@ const NavBar = (props) => {
             <li class="nav-item">
                 <button class="btn btn-nav mx-auto" onClick={()=> {props.setCurrentView('cart')}}>Shopping Cart</button>
             </li>
+            <select value={props.filterBy} onChange={props.updateFilter}>
+                <option>All</option>
+              {
+                props.artists.map((artist) => {
+                    return (<option value={artist.name}>{artist.name}</option>)
+                })
+              }
+            </select>
             <li class="nav-item">
                 {props.currentUser &&
                     <p>Welcome {props.currentUser.username}</p>
