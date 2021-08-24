@@ -1,7 +1,5 @@
 ///////////////---------Imports---------///////////////
 import React, {useState, useEffect} from 'react'
-// import {Modal} from 'react-responsive-modal'
-// import 'react-responsive-modal/styles.css'
 import axios from 'axios'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,13 +11,15 @@ import Banner from './components/utils/Banner'
 import NavBar from './components/utils/NavBar'
 import CreateUser from './components/users/CreateUser'
 import LogIn from './components/users/LogIn'
+import CreateArtist from './components/artist/CreateArtist'
+import EditArtist from './components/artist/EditArtist'
 
 //====Artist====//
 // import CreateArtist from './components/artist/CreateArtist'
 // import EditArtist from './components/artist/EditArtist'
 
 //====Users====//
-// import CreateUser from './components/user/CreateUser'
+// import CreateUser from './components/users/CreateUser'
 
 const App = () => {
     ///////////////---------Hooks/States---------///////////////
@@ -28,6 +28,7 @@ const App = () => {
     let [currentView, setCurrentView] = useState('showArt')
     let [users, setUsers] = useState([])
     let [artists, setArtists] =useState([])
+    let [filterBy, setFilterBy] = useState('All')
 
     ///////////////---------Functions---------///////////////
     //====Create====//
@@ -40,12 +41,28 @@ const App = () => {
             })
     }
 
+    const handleCreateArtist = (addArtist) => {
+      axios
+        .post('https://murmuring-coast-02165.herokuapp.com/api/artist', addArtist)
+        .then((response) => {
+          getArtists()
+        })
+
+    }
+
     //====Update====//
     const handleUpdate = (editArt) => {
         axios
             .put('https://murmuring-coast-02165.herokuapp.com/api/art/' + editArt.id, editArt)
             .then((response) => {
                 getArt()
+            })
+    }
+    const handleUpdateArtist = (editArtist) => {
+        axios
+            .put('https://murmuring-coast-02165.herokuapp.com/api/artist/' + editArtist.id, editArtist)
+            .then((response) => {
+                getArtists()
             })
     }
 
@@ -57,6 +74,13 @@ const App = () => {
                 getArt()
             })
     }
+    const handleDeleteArtist = (event)=> {
+      axios
+        .delete('https://murmuring-coast-02165.herokuapp.com/api/artist/' + event.target.value)
+        .then((response) => {
+          getArtists()
+        })
+    }
 
     //====Show====//
     const getArt = () => {
@@ -64,6 +88,7 @@ const App = () => {
             .get('https://murmuring-coast-02165.herokuapp.com/api/art')
             .then(
                 (response) => setArtCollection(response.data),
+
                 (error) => console.error(error)
             )
             .catch((error) => console.error(error))
@@ -85,6 +110,11 @@ const App = () => {
             })
     }
 
+    //====Filter====//
+    const updateFilter = (event) => {
+     setFilterBy(event.target.value)
+    }
+
     //====useEffect====//
     useEffect(() => {
         getArt()
@@ -101,6 +131,9 @@ const App = () => {
                 getUsers={getUsers}
                 currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
+                artists={artists}
+                filterBy={filterBy}
+                updateFilter={updateFilter}
             />
 
             <div class='mx-auto text-center'>
@@ -126,20 +159,36 @@ const App = () => {
                   setCurrentView={setCurrentView}
                 />
             }
+            {currentView == 'createArtist' &&
+                <CreateArtist
+                  handleCreateArtist={handleCreateArtist}
+                  setCurrentView={setCurrentView}
+                />
+            }
             {currentView == 'showArt' &&
                 <>
                 <br/><br/>
                 <div class='d-flex flex-wrap mx-auto text-center'>
+                {filterBy == 'All' &&
+                <>
                 {artCollection.map((pieces) => {
+                    return <ShowArt prop={pieces} />
+                })}
+                </>
+                }
+                {artCollection.filter(artWork => artWork.author.name == filterBy).map((pieces) => {
                     return <ShowArt prop={pieces} />
                 })}
                 </div>
                 </>
             }
+
             {currentView == 'editArt' &&
                 <>
                 <br/><br/>
                 <div class='d-flex flex-wrap mx-auto'>
+                {filterBy == "All" &&
+                <>
                 {artCollection.map((pieces) => {
                   return (
                       <div class='card flex-even'>
@@ -155,6 +204,45 @@ const App = () => {
                       </div>
                   )
                 })}
+                </>
+                }
+                {artCollection.filter(artWork => artWork.author.name == filterBy).map((pieces) => {
+                    return (
+                        <div class='card flex-even'>
+                            <ShowArt
+                                prop={pieces}
+                            />
+                            <EditArt
+                                handleUpdate={handleUpdate}
+                                piece={pieces}
+                                handleDelete={handleDelete}
+                                artists={artists}
+                            />
+                        </div>
+                    )
+                })}
+
+                </div>
+                </>
+            }
+            {currentView == 'editArtist' &&
+                <>
+                <br/><br/>
+                <div class='d-flex flex-wrap mx-auto'>
+                {artists.map((person) => {
+                  return (
+                      <div class='card flex-even'>
+
+                          <EditArtist
+                              handleUpdateArtist={handleUpdateArtist}
+                              person={person}
+                              handleDeleteArtist={handleDeleteArtist}
+                              artists={artists}
+                          />
+                      </div>
+                  )
+                })}
+
                 </div>
                 </>
             }
