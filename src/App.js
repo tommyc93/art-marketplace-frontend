@@ -12,6 +12,7 @@ import NavBar from './components/utils/NavBar'
 import CreateUser from './components/users/CreateUser'
 import LogIn from './components/users/LogIn'
 import CreateArtist from './components/artist/CreateArtist'
+import EditArtist from './components/artist/EditArtist'
 
 //====Artist====//
 // import CreateArtist from './components/artist/CreateArtist'
@@ -172,6 +173,28 @@ const App = () => {
                       </div>
                   )
                 })}
+
+                </div>
+                </>
+            }
+            {currentView == 'editArtist' &&
+                <>
+                <br/><br/>
+                <div class='d-flex flex-wrap mx-auto'>
+                {artists.map((person) => {
+                  return (
+                      <div class='card flex-even'>
+
+                          <EditArtist
+                              handleUpdate={handleUpdate}
+                              person={person}
+                              handleDelete={handleDelete}
+                              artists={artists}
+                          />
+                      </div>
+                  )
+                })}
+
                 </div>
                 </>
             }
