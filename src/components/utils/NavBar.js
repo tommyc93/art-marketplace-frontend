@@ -26,6 +26,9 @@ const NavBar = (props) => {
                 <button class="btn btn-nav mx-auto" onClick={()=> {props.setCurrentView('showArt')}}>Gallery</button>
             </li>
             <li class="nav-item">
+                <button class="btn btn-nav mx-auto" onClick={()=> {props.setCurrentView('cart')}}>Shopping Cart</button>
+            </li>
+            <li class="nav-item">
                 {props.currentUser &&
                     <p>Welcome {props.currentUser.username}</p>
                 }

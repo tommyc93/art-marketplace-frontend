@@ -11,6 +11,7 @@ import Banner from './components/utils/Banner'
 import NavBar from './components/utils/NavBar'
 import CreateUser from './components/users/CreateUser'
 import LogIn from './components/users/LogIn'
+import CreateArtist from './components/artist/CreateArtist'
 
 //====Artist====//
 // import CreateArtist from './components/artist/CreateArtist'
@@ -38,6 +39,15 @@ const App = () => {
             })
     }
 
+    const handleCreateArtist = (addArtist) => {
+      axios
+        .post('https://murmuring-coast-02165.herokuapp.com/api/artist', addArtist)
+        .then((response) => {
+          getArtists()
+        })
+
+    }
+
     //====Update====//
     const handleUpdate = (editArt) => {
         axios
@@ -62,6 +72,7 @@ const App = () => {
             .get('https://murmuring-coast-02165.herokuapp.com/api/art')
             .then(
                 (response) => setArtCollection(response.data),
+
                 (error) => console.error(error)
             )
             .catch((error) => console.error(error))
@@ -82,6 +93,8 @@ const App = () => {
                 setArtists(response.data)
             })
     }
+
+
 
     //====useEffect====//
     useEffect(() => {
@@ -121,6 +134,12 @@ const App = () => {
                 <CreateArt
                   handleCreate={handleCreate}
                   artists={artists}
+                  setCurrentView={setCurrentView}
+                />
+            }
+            {currentView == 'createArtist' &&
+                <CreateArtist
+                  handleCreateArtist={handleCreateArtist}
                   setCurrentView={setCurrentView}
                 />
             }
