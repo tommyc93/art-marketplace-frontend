@@ -21,6 +21,14 @@ const NavBar = (props) => {
                     <li><hr class="dropdown-divider" /></li>
                     <li><a class="dropdown-item" onClick={()=> {props.setCurrentView('editArt')}}>Edit Art</a></li>
                 </ul>
+                <button class="btn btn-link nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Artist
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" onClick={()=> {props.setCurrentView('createArtist')}}>Add Artist</a></li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><a class="dropdown-item" onClick={()=> {props.setCurrentView('editArtist')}}>Edit Artist</a></li>
+                </ul>
             </li>
             <li class="nav-item">
                 <button class="btn btn-nav mx-auto" onClick={()=> {props.setCurrentView('showArt')}}>Gallery</button>
