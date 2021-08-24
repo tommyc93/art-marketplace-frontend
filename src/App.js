@@ -187,6 +187,8 @@ const App = () => {
                 <>
                 <br/><br/>
                 <div class='d-flex flex-wrap mx-auto'>
+                {filterBy == "All" &&
+                <>
                 {artCollection.map((pieces) => {
                   return (
                       <div class='card flex-even'>
@@ -201,6 +203,23 @@ const App = () => {
                           />
                       </div>
                   )
+                })}
+                </>
+                }
+                {artCollection.filter(artWork => artWork.author.name == filterBy).map((pieces) => {
+                    return (
+                        <div class='card flex-even'>
+                            <ShowArt
+                                prop={pieces}
+                            />
+                            <EditArt
+                                handleUpdate={handleUpdate}
+                                piece={pieces}
+                                handleDelete={handleDelete}
+                                artists={artists}
+                            />
+                        </div>
+                    )
                 })}
 
                 </div>
