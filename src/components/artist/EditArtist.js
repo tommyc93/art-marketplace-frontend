@@ -15,8 +15,8 @@ const EditArtist = (props) => {
 
   return (
     <div class='mb-3'>
-        <details>
-        <summary>Edit Artist</summary>
+
+        Edit Artist
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name" class="form-label">Name: </label>
 
@@ -26,7 +26,7 @@ const EditArtist = (props) => {
                 <input type='submit' class='btn btn-outline-dark' />
             </form>
 
-        </details>
+        
         <button onClick={props.handleDeleteArtist} value={person.id} class='btn btn-outline-danger'>Delete</button>
     </div>
   )

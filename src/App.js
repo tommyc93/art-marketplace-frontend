@@ -34,6 +34,8 @@ const App = () => {
     let [artists, setArtists] =useState([])
     let [filterBy, setFilterBy] = useState('All')
     let [cart, setCart] = useState([])
+    let [sum, setSum] = useState(0)
+    let [updateCart, setUpdateCart] = useState(cart)
     let [rerender, setRerender] = useState(false)
 
     ///////////////---------Functions---------///////////////
@@ -97,10 +99,10 @@ const App = () => {
     }
     const handleDeleteArtist = (event)=> {
       axios
-        .delete('https://murmuring-coast-02165.herokuapp.com/api/artist/' + event.target.value)
-        .then((response) => {
-          getArtists()
-        })
+          .delete('https://murmuring-coast-02165.herokuapp.com/api/artist/' + event.target.value)
+          .then((response) => {
+              getArtists()
+          })
     }
 
     //====Show====//
@@ -145,7 +147,17 @@ const App = () => {
         let cartUpdated = cart
         cartUpdated.splice(item, 1)
         setCart(cartUpdated)
+        cartSum()
         setRerender(!rerender)
+    }
+
+    const cartSum = () => {
+         let sumTotal = 0
+         for (let i = 0; i < updateCart.length; i++){
+             sumTotal += updateCart[i].price
+         }
+         setSum(sumTotal)
+         setRerender(!rerender)
     }
 
 
@@ -159,8 +171,16 @@ const App = () => {
         getArt()
         getUsers()
         getArtists()
-        setCart(cart)
     }, [])
+
+    useEffect(() => {
+         setUpdateCart(cart)
+         cartSum()
+    }, [cart])
+
+    useEffect(() => {
+         cartSum()
+    }, [updateCart])
 
     ///////////////---------Return---------///////////////
     return(
@@ -176,6 +196,7 @@ const App = () => {
                 updateFilter={updateFilter}
                 cart={cart}
                 setCart={setCart}
+                sum={sum}
             />
 
             <div class='mx-auto text-center'>
@@ -232,6 +253,7 @@ const App = () => {
                                 prop={pieces}
                                 addCart={addCart}
                                 cart={cart}
+                                currentView={currentView}
                             />
                 })}
                 </>
@@ -241,6 +263,7 @@ const App = () => {
                                 prop={pieces}
                                 addCart={addCart}
                                 cart={cart}
+                                currentView={currentView}
                             />
                 })}
                 </div>
@@ -264,6 +287,7 @@ const App = () => {
                               piece={pieces}
                               handleDelete={handleDelete}
                               artists={artists}
+                              setCurrentView={setCurrentView}
                           />
                       </div>
                   )
@@ -281,6 +305,7 @@ const App = () => {
                                 piece={pieces}
                                 handleDelete={handleDelete}
                                 artists={artists}
+                                setCurrentView={setCurrentView}
                             />
                         </div>
                     )
@@ -316,6 +341,10 @@ const App = () => {
                     handleDelete={handleDelete}
                     cart={cart}
                     setCart={setCart}
+                    setSum={setSum}
+                    setUpdateCart={setUpdateCart}
+                    getArt={getArt}
+                    setCurrentView={setCurrentView}
                 />
             }
 
