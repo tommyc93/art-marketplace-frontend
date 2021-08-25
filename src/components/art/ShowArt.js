@@ -31,6 +31,7 @@ const ShowArt = (props) => {
                       <li class='list-unstyled'><strong>Price: </strong>{props.prop.price}</li>
                       <li class='list-unstyled'><strong>Rating: </strong>{props.prop.rating}</li>
                 </ul>
+                <h5 class='float-end'><strong>Price: <span class='text-navy'>{props.prop.price}</span></strong></h5><br/><br/>
                 {props.cart &&
                   props.currentUser &&
                   props.currentUser.use === 'buy' &&
@@ -38,7 +39,7 @@ const ShowArt = (props) => {
                    props.cart.length > 0 &&
                     (props.cart.some(item => item.id == props.prop.id))?
                         <button class='btn btn-outline-secondary'>In Cart</button>
-                        :<button onClick={()=>handleBuy(props.prop)} class='btn btn-outline-info'>Add to Cart <span class="material-icons">
+                        :<button onClick={()=>handleBuy(props.prop)} class='btn btn-outline-primary'>Add to Cart <span class="material-icons">
                             add_shopping_cart
                         </span></button>
                         :<></>
