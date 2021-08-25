@@ -3,38 +3,19 @@ import React, {useState, useEffect} from 'react'
 
 const NavBar = (props) => {
   ///////////////---------Functions---------///////////////
-  let [sum, setSum] = useState(0)
-  let [updateCart, setUpdateCart] = useState(props.cart)
-  const [rerender, setRerender] = useState(false)
 
   const logOut = () => {
         props.setCurrentUser(undefined)
         props.setCurrentView('showArt')
    }
 
-   const cartSum = () => {
-        let sumTotal = 0
-        for (let i = 0; i < updateCart.length; i++){
-            sumTotal += updateCart[i].price
-            console.log(sumTotal)
-        }
-        setSum(sumTotal)
-        setRerender(!rerender)
-   }
-
-   //====useEffect====//
-   useEffect(() => {
-        setUpdateCart(props.cart)
-   }, [props.cart])
-
-   useEffect(() => {
-        cartSum()
-   }, [updateCart])
-
   ///////////////---------Return---------///////////////
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
         <ul class="navbar-nav nav-fill w-100">
+
+            {props.currentUser &&
+              props.currentUser.use === 'sell' &&
             <li class="nav-item dropdown">
                 <button class="btn btn-link nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     Art
@@ -53,15 +34,21 @@ const NavBar = (props) => {
                     <li><a class="dropdown-item" onClick={()=> {props.setCurrentView('editArtist')}}>Edit Artist</a></li>
                 </ul>
             </li>
+            }
             <li class="nav-item">
                 <button class="btn btn-nav mx-auto" onClick={()=> {props.setCurrentView('showArt')}}>Gallery</button>
             </li>
+
+            {props.currentUser &&
+            props.currentUser.use === 'buy' &&
             <li class="nav-item">
-                <button class="btn btn-nav mx-auto" onClick={()=> {props.setCurrentView('cart')}}>Shopping Cart</button>
+                <button class="btn btn-nav mx-auto" onClick={()=> {props.setCurrentView('cart')}}><span className="material-icons">shopping_cart</span></button>
                 <br/>
                 {props.cart.length > 0 &&
-                  <p>Total $ {sum}</p>}
+                  <p>Total $ {props.sum}</p>}
             </li>
+            }
+
             <li class="nav-item">
             <label htmlFor='select'>Filter By Artist:</label><br/>
             <select class='form-select w-50 mx-auto' value={props.filterBy} onChange={props.updateFilter}>

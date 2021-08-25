@@ -7,6 +7,7 @@ const CreateUser = (props) => {
     let [errorMessage, setErrorMessage] = useState('')
     let [newPassword, setNewPassword] = useState('')
     let [newUsername, setNewUsername] = useState('')
+    let [newUse, setNewUse] = useState('')
 
     ///////////////---------Function---------///////////////
 
@@ -16,6 +17,9 @@ const CreateUser = (props) => {
         },
         passwordChange: (e) => {
             setNewPassword(e.target.value)
+        },
+        useChange: (e) => {
+            setNewUse(e.target.value)
         }
     }
 
@@ -30,7 +34,8 @@ const CreateUser = (props) => {
               'https://murmuring-coast-02165.herokuapp.com/api/users',
               {
                 username:newUsername,
-                password:newPassword
+                password:newPassword,
+                use:newUse
               }
             ).then((response) => {
                 props.getUsers()
@@ -52,7 +57,12 @@ const CreateUser = (props) => {
                     <br/>
                     <label htmlFor='username' class="form-label">Username: </label>
                     <input type='text' onChange={changeHandlers.usernameChange} class="form-control" />
-                    <label htmlFor='username' class="form-label">Password: </label>
+                    <label htmlFor='use' class="form-label">Account Type: </label>
+                    <select class='form-select' onChange={changeHandlers.useChange}>
+                        <option value='buy'>Buyer</option>
+                        <option value='sell'>Seller</option>
+                    </select>
+                    <label htmlFor='password' class="form-label">Password: </label>
                     <input type='password' onChange={changeHandlers.passwordChange} class="form-control" />
                     <br/>
                     <p>Password must be 7 to 15 characters which contain at least one numeric digit and a special character</p>

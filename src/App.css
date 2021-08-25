@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+:root {
+    --black: #0c1829;
+}
+
 body{
   background-image: linear-gradient(to bottom right, rgba(223,77,10,.7), rgba(223,77,10,.2));
 }
@@ -23,5 +27,11 @@ body{
 .s-image {
   width: 100%;
   max-width: 100%;
+}
 
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }

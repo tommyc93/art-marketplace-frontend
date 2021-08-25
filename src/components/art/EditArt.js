@@ -13,6 +13,7 @@ const EditArt = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault()
         props.handleUpdate(piece)
+        props.setCurrentView('showArt')
     }
 
     ///////////////---------Return---------///////////////
@@ -26,7 +27,8 @@ const EditArt = (props) => {
                     <div class='form-group'>
                     <label htmlFor="author" class="form-label">Artist: </label>
 
-                      <select class="form-select" name="author" onChange={handleChange}>
+                      <select class="form-select" name="author" onChange={handleChange} value={piece.author.id}>
+                          <option>-</option>
                         {
                           props.artists.map((artist) => {
                               return (<option value={artist.id}>{artist.name}</option>)
@@ -42,7 +44,7 @@ const EditArt = (props) => {
                     <label htmlFor="price" class="form-label">Price: </label>
                     <input type="number" name="price" onChange={handleChange} value={piece.price} class="form-control"/><br/>
                     <label htmlFor="description" class="form-label">Description: </label>
-                    <textarea name="description" onChange={handleChange} class="form-control"></textarea><br/>
+                    <textarea name="description" onChange={handleChange} class="form-control" value={piece.description}></textarea><br/>
                     <label htmlFor="created_date" class="form-label">Created Date: </label>
                     <input type="date" name="created_date" onChange={handleChange} value={piece.created_date} class="form-control"/><br/>
                     <input type='submit' class='btn btn-outline-dark' />
