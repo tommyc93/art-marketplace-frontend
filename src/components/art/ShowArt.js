@@ -32,6 +32,8 @@ const ShowArt = (props) => {
                       <li class='list-unstyled'><strong>Rating: </strong>{props.prop.rating}</li>
                 </ul>
                 {props.cart &&
+                  props.currentUser &&
+                  props.currentUser.use === 'buy' &&
                   (props.currentView === 'showArt')?
                    props.cart.length > 0 &&
                     (props.cart.some(item => item.id == props.prop.id))?

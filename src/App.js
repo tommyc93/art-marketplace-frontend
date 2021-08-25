@@ -254,6 +254,7 @@ const App = () => {
                                 addCart={addCart}
                                 cart={cart}
                                 currentView={currentView}
+                                currentUser={currentUser}
                             />
                 })}
                 </>
@@ -264,6 +265,7 @@ const App = () => {
                                 addCart={addCart}
                                 cart={cart}
                                 currentView={currentView}
+                                currentUser={currentUser}
                             />
                 })}
                 </div>
