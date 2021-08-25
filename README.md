@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# [Art Marketplace](https://art-marketplace.herokuapp.com/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Authors
+- Tommy Chung |[LinkedIn](https://www.linkedin.com/in/tommy-chung93)|  |[GitHub](https://github.com/tommyc93)|
+- Danish |[LinkedIn](https://www.linkedin.com/in/danishvirani/)| |[GitHub](https://github.com/danishvirani)|
+- Dwayne |[LinkedIn](https://www.linkedin.com/in/miller-0)| |[GitHub](https://github.com/Dwayne92)|
 
-## Available Scripts
+### Approach
+#### Picking a Project Idea
+We discussed a few different ideas ranging from e-commerce app to digital art display.  We settled on combining both ideas to develop an app where Users/Artists can sell and buy their art pieces.
 
-In the project directory, you can run:
+#### Splitting the work
+We were able to decide how we would delegate the tasks for our projects.  I would work on setting up the Front End and work on components for the Front End.  Danish would work on the Back End.  Dwayne would add and adjust our format using CSS/CSS frameworks.  After that we would peer program together on parts we may need assistance on.  We cloned our repos and created separate branches for both us to work on independently so we wouldn't have merge conflicts with one another.
 
-### `npm start`
+#### Data Structure
+- Created the Back End and Front End in a separate repos.
+- Created the Back End using PostgreSQL, Django, Python.
+- Created the Front End using React & Javascript.
+- Linked the Back End with the Front End using Heroku links.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## User Stories
+#### Core
+- User should be able to add Art Pieces / Artists
+- Edit Art Pieces / Artists
+- Delete Art Pieces
+- Filter through the Artwork using filter by Artists
+- Users should be able to adjust Art ratings
+- Users should be able to sign-up and login
+- Users can add Artwork to their shopping cart and it would display the total.
+- Artwork can be removed from cart or bought, then removed from database.
+- User should be able to navigate through the app using navigational tabs at the Navbar
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### Stretch
+- Image Carousel for Artwork
+- Filtering option
+- Add ratings
+- Using bootstrap
+- Add sign-up/sign-in
+- Authentication with Bcrypt
 
-### `npm test`
+## Technologies/Languages Used
+#### MERN Stack
+- Django
+- SQL
+- React
+- Bootstrap
+- Python
+- JavaScript
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Project Management, hosting, and deployed
+- GitHub
+- Heroku
+- Trello/Agile board
 
-### `npm run build`
+#### Unsolved Problems
+- Was not able to fully create a transaction page utilizing payment methods.
+- Dynamically see change in price total in cart as User removes Artwork from cart.
+- Exploring advanced 3d shape & text building in CSS
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Solved Problems
+- Was able to get filter functionality working
+- Was able to get Shopping Cart to work manipulating through the Front-End
+- Was able to get the page to re-render for the Shopping Cart by adding a dummy hook into the Remove from Cart function.
+- Settled on neutral tone background that compliments pieces & got carousel functionality
+- Was able to get sign-up/login functionality using Python by adding password hashes into the setting and using jsonRequest in our API views.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Reflection Section
+- If we had more time I would have liked to get a transaction page working
+- Would like to try incorporating and using ManyToMany relations in the Back-End
