@@ -16,6 +16,7 @@ import CreateUser from './components/users/CreateUser'
 import LogIn from './components/users/LogIn'
 import CreateArtist from './components/artist/CreateArtist'
 import EditArtist from './components/artist/EditArtist'
+import Cart from './components/utils/Cart'
 
 //====Artist====//
 // import CreateArtist from './components/artist/CreateArtist'
@@ -31,6 +32,9 @@ const App = () => {
     let [currentView, setCurrentView] = useState('showArt')
     let [users, setUsers] = useState([])
     let [artists, setArtists] =useState([])
+    let [filterBy, setFilterBy] = useState('All')
+    let [cart, setCart] = useState([])
+    let [rerender, setRerender] = useState(false)
 
     ///////////////---------Functions---------///////////////
 
@@ -127,13 +131,35 @@ const App = () => {
             })
     }
 
+    //=====Cart=====//
+    const addCart = (item) => {
+        if (!cart.includes(item)){
+            setCart([...cart, item])
+            setRerender(!rerender)
+        } else {
+          alert('You already have that item in your cart!')
+        }
+    }
 
+    const removeCart = (item) => {
+        let cartUpdated = cart
+        cartUpdated.splice(item, 1)
+        setCart(cartUpdated)
+        setRerender(!rerender)
+    }
+
+
+    //====Filter====//
+    const updateFilter = (event) => {
+     setFilterBy(event.target.value)
+    }
 
     //====useEffect====//
     useEffect(() => {
         getArt()
         getUsers()
         getArtists()
+        setCart(cart)
     }, [])
 
     ///////////////---------Return---------///////////////
@@ -145,6 +171,11 @@ const App = () => {
                 getUsers={getUsers}
                 currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
+                artists={artists}
+                filterBy={filterBy}
+                updateFilter={updateFilter}
+                cart={cart}
+                setCart={setCart}
             />
 
             <div class='mx-auto text-center'>
@@ -194,19 +225,34 @@ const App = () => {
                 </div>
                 <br/><br/>
                 <div class='d-flex flex-wrap mx-auto text-center'>
-
-
-
+                {filterBy == 'All' &&
+                <>
                 {artCollection.map((pieces) => {
-                    return <ShowArt prop={pieces} />
+                    return <ShowArt
+                                prop={pieces}
+                                addCart={addCart}
+                                cart={cart}
+                            />
+                })}
+                </>
+                }
+                {artCollection.filter(artWork => artWork.author.name == filterBy).map((pieces) => {
+                    return <ShowArt
+                                prop={pieces}
+                                addCart={addCart}
+                                cart={cart}
+                            />
                 })}
                 </div>
                 </>
             }
+
             {currentView == 'editArt' &&
                 <>
                 <br/><br/>
                 <div class='d-flex flex-wrap mx-auto'>
+                {filterBy == "All" &&
+                <>
                 {artCollection.map((pieces) => {
                   return (
                       <div class='card flex-even' picf>
@@ -221,6 +267,23 @@ const App = () => {
                           />
                       </div>
                   )
+                })}
+                </>
+                }
+                {artCollection.filter(artWork => artWork.author.name == filterBy).map((pieces) => {
+                    return (
+                        <div class='card flex-even'>
+                            <ShowArt
+                                prop={pieces}
+                            />
+                            <EditArt
+                                handleUpdate={handleUpdate}
+                                piece={pieces}
+                                handleDelete={handleDelete}
+                                artists={artists}
+                            />
+                        </div>
+                    )
                 })}
 
                 </div>
@@ -246,6 +309,14 @@ const App = () => {
 
                 </div>
                 </>
+            }
+            {currentView == 'cart' &&
+                <Cart
+                    removeCart={removeCart}
+                    handleDelete={handleDelete}
+                    cart={cart}
+                    setCart={setCart}
+                />
             }
 
             </div>

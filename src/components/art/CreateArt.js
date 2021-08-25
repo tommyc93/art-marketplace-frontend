@@ -31,6 +31,7 @@ const CreateArt = (props) => {
                 <label htmlFor="author" class="form-label">Artist: </label>
 
                   <select class="form-select" name="author" onChange={handleChange}>
+                    <option>-</option>
                     {
                       props.artists.map((artist) => {
                           return (<option value={artist.id}>{artist.name}</option>)

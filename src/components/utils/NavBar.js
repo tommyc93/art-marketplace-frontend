@@ -1,12 +1,35 @@
 ///////////////---------Imports---------///////////////
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 const NavBar = (props) => {
   ///////////////---------Functions---------///////////////
+  let [sum, setSum] = useState(0)
+  let [updateCart, setUpdateCart] = useState(props.cart)
+  const [rerender, setRerender] = useState(false)
+
   const logOut = () => {
-       props.setCurrentUser(undefined)
-       props.setCurrentView('showArt')
+        props.setCurrentUser(undefined)
+        props.setCurrentView('showArt')
    }
+
+   const cartSum = () => {
+        let sumTotal = 0
+        for (let i = 0; i < updateCart.length; i++){
+            sumTotal += updateCart[i].price
+            console.log(sumTotal)
+        }
+        setSum(sumTotal)
+        setRerender(!rerender)
+   }
+
+   //====useEffect====//
+   useEffect(() => {
+        setUpdateCart(props.cart)
+   }, [props.cart])
+
+   useEffect(() => {
+        cartSum()
+   }, [updateCart])
 
   ///////////////---------Return---------///////////////
   return (
@@ -35,6 +58,20 @@ const NavBar = (props) => {
             </li>
             <li class="nav-item">
                 <button class="btn btn-nav mx-auto" onClick={()=> {props.setCurrentView('cart')}}>Shopping Cart</button>
+                <br/>
+                {props.cart.length > 0 &&
+                  <p>Total $ {sum}</p>}
+            </li>
+            <li class="nav-item">
+            <label htmlFor='select'>Filter By Artist:</label><br/>
+            <select class='form-select w-50 mx-auto' value={props.filterBy} onChange={props.updateFilter}>
+                <option>All</option>
+              {
+                props.artists.map((artist) => {
+                    return (<option value={artist.name}>{artist.name}</option>)
+                })
+              }
+            </select>
             </li>
             <li class="nav-item">
                 {props.currentUser &&
