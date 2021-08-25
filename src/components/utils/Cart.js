@@ -1,15 +1,21 @@
 ///////////////---------Imports---------///////////////
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 const Cart = (props) => {
     ///////////////---------Hooks/States---------///////////////
-
+    const [rerender, setRerender] = useState(false)
 
     ///////////////---------Functions---------///////////////
-    const handleRemove = (removeItem) => {
-        console.log(removeItem)
-        props.removeCart(removeItem.id)
+    const handleRemove = (index) => {
+        console.log(index)
+        props.removeCart(index)
+        setRerender(!rerender)
     }
+
+    const getCart = () => {
+        props.setCart(props.cart)
+    }
+
 
     ///////////////---------Return---------///////////////
     return (
@@ -42,7 +48,7 @@ const Cart = (props) => {
                                       <li class='list-unstyled'><strong>Rating: </strong>{item.rating}</li>
                                 </ul>
                             </div>
-                            <button onClick={()=>handleRemove(item)} value={item.id} class='btn btn-outline-danger'>Remove from Cart</button>
+                            <button onClick={()=>handleRemove(props.cart.indexOf(item))} value={item.id} class='btn btn-outline-danger'>Remove from Cart</button>
                             <button onClick={props.handleDelete} value={item.id} class='btn btn-outline-danger'>Delete</button>
                         </div>
                     )
