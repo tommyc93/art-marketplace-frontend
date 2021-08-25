@@ -255,7 +255,7 @@ const App = () => {
                 <>
                 {artCollection.map((pieces) => {
                   return (
-                      <div class='card flex-even' picf>
+                      <div class='card flex-even' >
                           <ShowArt
                               prop={pieces}
                           />
